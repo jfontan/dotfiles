@@ -1,0 +1,64 @@
+set tabstop=4
+set sw=4
+set et
+set ai
+syntax on
+set cc=80
+
+"set shell=/usr/bin/bash
+set linebreak
+set nonumber
+
+"call neobundle#begin(expand('~/.vim/bundle/'))
+"NeoBundleFetch 'Shougo/neobundle.vim'
+"NeoBundle 'altercation/vim-colors-solarized'
+"call neobundle#end()
+
+" set background=dark
+" let g:solarized_termtrans=1
+" colorscheme solarized
+
+let base16colorspace=256
+"colorscheme base16-solarized
+colorscheme base16-flat
+
+augroup vimrc-yaml
+  autocmd!
+  autocmd BufNewFile,BufRead *.yml,*.yaml setlocal filetype=yaml
+  autocmd FileType yaml set tabstop=2|set shiftwidth=2|set expandtab
+augroup END
+
+augroup vimrc-ruby
+  autocmd!
+  autocmd BufNewFile,BufRead *.rb,*.rbw,*.gemspec setlocal filetype=ruby
+  autocmd FileType ruby set tabstop=4|set shiftwidth=4|set expandtab
+augroup END
+
+augroup vimrc-crystal
+  autocmd!
+  autocmd BufNewFile,BufRead *.crystal,*.cr setlocal filetype=crystal
+  autocmd FileType crystal set tabstop=2|set shiftwidth=2|set expandtab|set syntax=ruby|set ai
+augroup END
+
+augroup vimrc-fish
+  autocmd!
+  autocmd BufNewFile,BufRead *.fish setlocal filetype=fish
+  autocmd FileType fish set tabstop=4|set shiftwidth=2|set expandtab|set syntax=ruby|set ai
+augroup END
+
+" Disable automatic pair ending
+let g:AutoPairs = {}
+
+" Enable ctrlp caching
+let g:ctrlp_use_caching = 1
+
+" change paste mode with F10 (even in insert mode
+set pastetoggle=<F10>
+
+" enable powerline fonts
+let g:airline_powerline_fonts = 1
+"let g:airline_theme = 'luna'
+
+
+
+
