@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+# Idea from https://faq.i3wm.org/question/6967/switch-all-windows-from-two-workspaces/
+
+require 'rubygems'
+require 'i3ipc'
+
+workspace_number = ARGV[0]
+
+if !workspace_number
+    STDERR.puts "I need a workspace number!"
+    exit -1
+end
+
+i3 = I3Ipc::Connection.new
+
+workspaces = i3.workspaces
+active = workspaces.select {|w| w.focused }.first
+destination = workspaces.select {|w| w.num == workspace_number.to_i }.first
+
+# Swap workspaces
+i3.command("rename workspace \"#{destination.name}\" to temporary")
+i3.command("rename workspace \"#{active.name}\" to \"#{destination.name}\"")
+i3.command("rename workspace temporary to \"#{active.name}\"")
+
+# Change workspaces output
+#i3.command("workspace \"#{active.name}\"")
+#i3.command("move workspace to output \"#{destination.output}\"")
+
+#i3.command("workspace \"#{destination.name}\"")
+#i3.command("move workspace to output \"#{active.output}\"")
+

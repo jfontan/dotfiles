@@ -1,0 +1,89 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'i3ipc'
+
+class I3Utils
+    DEFAULT_NAMES = [
+        "",    # 0
+        " ",   # 1
+        " ",   # 2
+        nil,    # 3
+        nil,    # 4
+        nil,    # 5
+        nil,    # 6
+        nil,    # 7
+        "",    # 8
+        "",    # 9
+        " ",   # 10
+    ]
+
+    def initialize
+        @i3 = I3Ipc::Connection.new
+    end
+
+    def get_workspace(number)
+        @i3.workspaces.select {|w| w.num.to_s == number }.first
+    end
+
+    def get_focused
+        @i3.workspaces.select {|w| w.focused }.first
+    end
+
+    def get_name(number)
+        w = get_workspace(number)
+
+        name = number.to_s
+
+        if w
+            return w.name
+        else
+            if name=DEFAULT_NAMES[number.to_i]
+                "#{number}:#{name}"
+            else
+                number.to_s
+            end
+        end
+    end
+
+    def focus_workspace(name)
+        @i3.command("workspace #{get_name(name)}")
+    end
+
+    def rename(new_name)
+        name = new_name.gsub(/\s/, '_')
+        w = get_focused
+        number = w.num
+        @i3.command("rename workspace to #{number}:#{name}")
+    end
+
+    def move(number)
+        @i3.command("move container to workspace #{get_name(number)}")
+    end
+
+end
+
+
+
+
+if ARGV.length < 2
+    STDERR.puts "I need two parameters!"
+    STDERR.puts "command parameter"
+    exit -1
+end
+
+command = ARGV[0]
+parameter = ARGV[1]
+
+i3 = I3Utils.new
+
+case command
+when "focus"
+    i3.focus_workspace(parameter)
+when "move"
+    i3.move(parameter)
+when "rename"
+    i3.rename(parameter)
+end
+
+
