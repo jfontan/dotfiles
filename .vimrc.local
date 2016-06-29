@@ -64,4 +64,5 @@ let g:airline_powerline_fonts = 1
 " disable line highlight as it very slow
 set nocursorline
 
-
+" macro to change rspec should
+let @b='Iexpect(/\.shouldct ).to'
