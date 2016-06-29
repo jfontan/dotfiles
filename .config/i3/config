@@ -286,7 +286,7 @@ bindsym $mod+minus scratchpad show
 # Swap workspace to work (2)
 bindsym $mod+x exec ~/.config/i3/swap_workspace 2
 
-exec_always feh --bg-tile ~/Pictures/solarized_linen.png
+exec_always feh --bg-fill ~/Pictures/orviz-background.jpg
 
 client.focused #81a2be #81a2be #1d1f21 #282a2e
 client.focused_inactive #373b41 #373b41 #969896 #282a2e
