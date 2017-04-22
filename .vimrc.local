@@ -39,7 +39,7 @@ augroup END
 augroup vimrc-crystal
   autocmd!
   autocmd BufNewFile,BufRead *.crystal,*.cr setlocal filetype=crystal
-  autocmd FileType crystal set tabstop=2|set shiftwidth=2|set expandtab|set syntax=ruby|set ai
+  autocmd FileType crystal set tabstop=2|set shiftwidth=2|set expandtab|set syntax=crystal|set ai
 augroup END
 
 augroup vimrc-fish
@@ -66,3 +66,6 @@ set nocursorline
 
 " macro to change rspec should
 let @b='Iexpect(/\.shouldct ).to'
+
+" enable spell checking
+set spell spelllang=en_us

@@ -1,5 +1,5 @@
 NeoBundle 'altercation/vim-colors-solarized'
-"NeoBundle 'rhysd/vim-crystal'
+NeoBundle 'rhysd/vim-crystal'
 NeoBundle 'chriskempson/base16-vim'
 
 "NeoBundleDisable 'SirVer/ultisnips'
