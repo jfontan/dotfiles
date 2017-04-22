@@ -35,7 +35,10 @@ floating_modifier $mod
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Shift+Return exec termite
 # bindsym $mod+Return exec termite
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Shift+Return exec gnome-terminal
+bindsym $mod+Return exec sakura
+# bindsym $mod+Return exec terminator
+# bindsym $mod+Shift+Return exec --no-startup-id gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -103,14 +106,29 @@ bindsym $mod+a focus parent
 set $wsp1 1:
 #set $wsp1 1:navegador
 set $wsp2 2:
-set $wsp3 3
-set $wsp4 4
-set $wsp5 5
-set $wsp6 6
-set $wsp7 7
+set $wsp3 3:
+set $wsp4 4:
+set $wsp5 5:
+set $wsp6 6:
+set $wsp7 7:
 set $wsp8 8:
 set $wsp9 9:
 set $wsp10 10:
+
+# set $wsp1 1:
+# #set $wsp1 1:navegador
+# set $wsp2 2:
+# set $wsp3 3
+# set $wsp4 4
+# set $wsp5 5
+# set $wsp6 6
+# set $wsp7 7
+# set $wsp8 8:
+# set $wsp9 9:
+# set $wsp10 10:
+
+set $wspmusic 
+set $musickey masculine
 
 # switch to workspace
 bindsym $mod+1 workspace $wsp1
@@ -123,6 +141,7 @@ bindsym $mod+7 workspace $wsp7
 bindsym $mod+8 workspace $wsp8
 bindsym $mod+9 workspace $wsp9
 bindsym $mod+0 workspace $wsp10
+bindsym $mod+$musickey workspace $wspmusic
 
 # bindsym $mod+1 exec ~/.config/i3/workspace_util focus 1
 # bindsym $mod+2 exec ~/.config/i3/workspace_util focus 2
@@ -146,6 +165,7 @@ bindsym $mod+Shift+7 move container to workspace $wsp7
 bindsym $mod+Shift+8 move container to workspace $wsp8
 bindsym $mod+Shift+9 move container to workspace $wsp9
 bindsym $mod+Shift+0 move container to workspace $wsp10
+bindsym $mod+Shift+$musickey move container to workspace $wspmusic
 
 # bindsym $mod+Shift+1 exec ~/.config/i3/workspace_util move 1
 # bindsym $mod+Shift+2 exec ~/.config/i3/workspace_util move 2
@@ -205,8 +225,8 @@ bindsym $mod+r mode "resize"
 
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 
-exec --no-startup-id nm-applet
-exec pa-applet
+# exec --no-startup-id nm-applet
+exec pa-applet --disable-notifications
 exec dunst
 
 # Sreen brightness controls
@@ -229,7 +249,7 @@ bindsym $mod+m move workspace to output down
 # Look
 #..........
 
-#new_window pixel 2
+new_window pixel 2
 #new_float pixel 2
 
 # Hybrid colors
@@ -248,24 +268,26 @@ client.background       $back
 
 # exec compton
 # exec --no-startup-id compton -cCGb --backend glx --vsync opengl
-exec --no-startup-id compton -b --backend glx --vsync opengl # No shadow
+# exec --no-startup-id compton -b --backend glx --vsync opengl # No shadow
+exec --no-startup-id compton -b --config ~/.config/i3/compton
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-  status_command i3status -c ~/.config/i3/i3status.conf
-        #tray_output primary
-        tray_output eDP1
-  colors {
-    separator #969896
-    background #1d1f21
-    statusline #c5c8c6
-    focused_workspace #81a2be #81a2be #1d1f21
-    active_workspace #373b41 #373b41 #ffffff
-    inactive_workspace #282a2e #282a2e #969896
-    urgent_workspace #cc6666 #cc6666 #ffffff
-  }
-}
+# bar {
+#   i3bar_command i3bar -t
+#   status_command i3status -c ~/.config/i3/i3status.conf
+#         #tray_output primary
+#         tray_output eDP1
+#   colors {
+#     separator #969896
+#     background #1d1f2100
+#     statusline #c5c8c6
+#     focused_workspace #81a2be #81a2be #1d1f21
+#     active_workspace #373b41 #373b41 #ffffff
+#     inactive_workspace #282a2e #282a2e #969896
+#     urgent_workspace #cc6666 #cc6666 #ffffff
+#   }
+# }
 
 # Move workspace to other display
 bindsym $mod+Control+Left move workspace to output left
@@ -287,8 +309,68 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+x exec ~/.config/i3/swap_workspace 2
 
 exec_always feh --bg-fill ~/Pictures/orviz-background.jpg
+#exec_always feh --bg-fill ~/Pictures/firewatch-orange.jpg
+# exec_always feh --bg-fill ~/Pictures/wildlands_02.jpg
+# exec_always feh --bg-fill ~/Pictures/mass_effect_andromeda.png
 
-client.focused #81a2be #81a2be #1d1f21 #282a2e
+#client.focused #81a2be #81a2be #1d1f21 #282a2e
+
+client.focused #81a2be #81a2be #1d1f21 #a82aae
 client.focused_inactive #373b41 #373b41 #969896 #282a2e
 client.unfocused #282a2e #282a2e #969896 #282a2e
-client.urgent #373b41 #cc6666 #ffffff #cc6666
+client.urgent #373b41 #fc6666 #ffffff #cc6666
+
+## Base16 Flat
+# Author: Chris Kempson (http://chriskempson.com)
+#
+# You can use these variables anywhere in the i3 configuration file.
+
+set $base00 #2C3E50
+set $base01 #34495E
+set $base02 #7F8C8D
+set $base03 #95A5A6
+set $base04 #BDC3C7
+set $base05 #e0e0e0
+set $base06 #f5f5f5
+set $base07 #ECF0F1
+set $base08 #E74C3C
+set $base09 #E67E22
+set $base0A #F1C40F
+set $base0B #2ECC71
+set $base0C #1ABC9C
+set $base0D #3498DB
+set $base0E #9B59B6
+set $base0F #be643c
+
+# Basic color configuration using the Base16 variables for windows and borders.
+# Property Name         Border  BG      Text    Indicator Child Border
+# client.focused          $base05 $base0D $base00 $base0D $base0D
+# client.focused_inactive $base01 $base01 $base05 $base03 $base01
+# client.unfocused        $base01 $base00 $base05 $base01 $base01
+# client.urgent           $base08 $base08 $base00 $base08 $base08
+# client.placeholder      $base00 $base00 $base05 $base00 $base00
+# client.background       $base07
+
+
+# gaps
+# for_window [class="^.*"] border pixel 20
+for_window [class="^.*"] border pixel 3
+# for_window [class="^.*"] border pixel 0
+
+gaps inner 0
+# gaps inner 10
+gaps outer 0
+smart_gaps on
+smart_borders on
+
+
+# polybar
+exec_always --no-startup-id /home/jfontan/.config/polybar/launch.sh
+
+# multimedia keys
+
+# Pulse Audio controls
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
