@@ -1,0 +1,25 @@
+#!/bin/bash
+
+sound_card=$1
+
+if [ -z "$sound_card" ]; then
+    echo "A sound card must be specified"
+    exit -1
+fi
+
+sink_name=$( pactl list sinks | grep -E '^\s+Name:' | cut -d' ' -f2 | \
+    grep "$sound_card" | head -n 1 )
+
+if [ -z "$sink_name" ]; then
+    echo "Sink name not found"
+    exit -1
+fi
+
+pacmd set-default-sink "$sink_name"
+
+clients=$(pacmd list-sink-inputs | grep -E "^\s+index:" | awk '{print $2}')
+
+for client in $clients; do
+    pacmd move-sink-input "$client" "$sink_name"
+done
+
